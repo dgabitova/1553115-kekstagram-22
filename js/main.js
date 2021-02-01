@@ -6,11 +6,7 @@ const getRandomNum =  function(minNumber, maxNumber) {
 getRandomNum(0, 500);
 
 // Get max string value
-const checkLengthString = (string, max = 140) => {
-  string.length;
-  if (string.length <= max) {
-    return true;
-  }
-  return false;
+const checkLengthString = (string, max) => {
+  return string.length <= max;
 }
-checkLengthString('Lorem ipsum dolor sit amet, consectetur adipiscing elit...');
+checkLengthString ('comment', 140);
