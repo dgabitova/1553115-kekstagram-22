@@ -13,6 +13,8 @@ checkLengthString ('comment', 140);
 
 //Функции для создания массива из 25 сгенерированных объектов
 const LIKES = getRandomNum(15, 200);
+
+
 const NAMES = [
   'Дмитрий',
   'Анна',
@@ -40,6 +42,8 @@ const NAMES = [
   'Константин',
   'Денис',
 ];
+
+
 const DESCRIPTION = [
   'Я этого хочу. Значит, это будет.',
   'Логика может привести вас от пункта А к пункту Б, а воображение – куда угодно.',
@@ -67,7 +71,9 @@ const DESCRIPTION = [
   'Делай, что можешь, с тем, что у тебя есть, и там, где ты находишься. ',
   'Не могу придумать умную цитату.',
 ];
-const message = [
+
+
+const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -75,46 +81,73 @@ const message = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
-const getId = [];
-const createId = () => {
-  const id = getRandomNum(1, 500);
-  if (!getId.includes(id)) {
-    getId.push(id);
-  }
-  return id;
-};
+
+
+const totalUsers = 25;
+
+
 const getAvatar = () => {
-  return 'img/avatar-${getRandomNum(1, 6)}.svg'
+  return `img/avatar-${getRandomNum(1, 6)}.svg`
 };
+
+
 const getRandomArrayElement = (element) => {
   return element [getRandomNum(0, element.length - 1)];
 };
+
+
+const getNewComment = () => {
+  return {
+    id: Number(getRandomNum(0, 2000) + getRandomNum(100, 500)),
+    avatar: getAvatar(),
+    message: getRandomArrayElement(MESSAGE, 0, 6),
+    name: getRandomArrayElement(NAMES, 0, 25),
+  }
+};
+
 const getRandomCommentsArray = () => {
   const commentsArray = [];
   const numberOfComments = getRandomNum(0, 5);
   for (let i = 0; i < numberOfComments; i++) {
-    const newComment = {
-      id: createId(),
-      avatar: getAvatar(),
-      message: getRandomArrayElement(message, 0, 6),
-      name: getRandomArrayElement(NAMES, 0, 25),
-    };
-    commentsArray.push(newComment);
+    commentsArray.push(getNewComment());
   }
   return commentsArray;
 };
-const getRandomObjectsArray = () => {
-  const objectsArray = [];
-  for (let i = 0; i < 25; i++) {
-    const newObject = {
+
+//Закомментила фрагмент, через который почему-то не получается вынести функцию:
+
+//const getNewPhotoObject = () => {
+//return {
+//      id: i + 1,
+//      url: `photos/${i + 1}.jpg`,
+//      description: getRandomArrayElement(DESCRIPTION),
+//      likes: getRandomNum(LIKES),
+//      comments: getRandomCommentsArray(),
+//    }
+//};
+
+//const getRandomUsersArray = () => {
+//  const usersArray = [];
+//  for (let i = 0; i < totalUsers; i++) {
+//   usersArray.push(getNewPhotoObject);
+//    }
+// return usersArray;
+//};
+
+
+const getRandomUsersArray = () => {
+  const usersArray = [];
+  for (let i = 0; i < totalUsers; i++) {
+    const newPhotoObject = {
       id: i + 1,
-      url: 'photos/${i + 1}.jpg',
+      url: `photos/${i + 1}.jpg`,
       description: getRandomArrayElement(DESCRIPTION),
-      likes: getRandomNum(15, 200),
+      likes: getRandomNum(LIKES),
       comments: getRandomCommentsArray(),
     };
-    objectsArray.push(newObject);
+    usersArray.push(newPhotoObject);
   }
-  return objectsArray;
+  return usersArray;
 };
-getRandomObjectsArray();
+
+getRandomUsersArray();
