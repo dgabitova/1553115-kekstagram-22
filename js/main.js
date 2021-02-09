@@ -114,40 +114,24 @@ const getRandomCommentsArray = () => {
   return commentsArray;
 };
 
-//Закомментила фрагмент, через который почему-то не получается вынести функцию:
 
-//const getNewPhotoObject = () => {
-//return {
-//      id: i + 1,
-//      url: `photos/${i + 1}.jpg`,
-//      description: getRandomArrayElement(DESCRIPTION),
-//      likes: getRandomNum(LIKES),
-//      comments: getRandomCommentsArray(),
-//    }
-//};
-
-//const getRandomUsersArray = () => {
-//  const usersArray = [];
-//  for (let i = 0; i < totalUsers; i++) {
-//   usersArray.push(getNewPhotoObject);
-//    }
-// return usersArray;
-//};
-
+const getNewPhotoObject = (i = 1) => {
+  return {
+    id: i + 1,
+    url: `photos/${i + 1}.jpg`,
+    description: getRandomArrayElement(DESCRIPTION),
+    likes: getRandomNum(LIKES),
+    comments: getRandomCommentsArray(),
+  }
+};
 
 const getRandomUsersArray = () => {
   const usersArray = [];
   for (let i = 0; i < totalUsers; i++) {
-    const newPhotoObject = {
-      id: i + 1,
-      url: `photos/${i + 1}.jpg`,
-      description: getRandomArrayElement(DESCRIPTION),
-      likes: getRandomNum(LIKES),
-      comments: getRandomCommentsArray(),
-    };
-    usersArray.push(newPhotoObject);
+    usersArray.push(getNewPhotoObject(i));
   }
   return usersArray;
 };
+
 
 getRandomUsersArray();
