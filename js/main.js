@@ -1,6 +1,4 @@
-import {getRandomNum, checkLengthString} from './utils.js';
-import './data.js';
+import {getRandomUsersArray} from './data.js';
+const usersArray = getRandomUsersArray();
 
-getRandomNum ();
-checkLengthString();
-
+window.console.log(usersArray);

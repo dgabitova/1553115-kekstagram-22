@@ -1,8 +1,7 @@
-import {getRandomNum} from './utils.js';
+import {getRandomNum, getRandomArrayElement} from './utils.js';
 
 //Функции для создания массива из 25 сгенерированных объектов
 const LIKES = getRandomNum(15, 200);
-
 
 const NAMES = [
   'Дмитрий',
@@ -32,7 +31,6 @@ const NAMES = [
   'Денис',
 ];
 
-
 const DESCRIPTION = [
   'Я этого хочу. Значит, это будет.',
   'Логика может привести вас от пункта А к пункту Б, а воображение – куда угодно.',
@@ -61,7 +59,6 @@ const DESCRIPTION = [
   'Не могу придумать умную цитату.',
 ];
 
-
 const MESSAGE = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -71,19 +68,11 @@ const MESSAGE = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-
 const totalUsers = 25;
-
 
 const getAvatar = () => {
   return `img/avatar-${getRandomNum(1, 6)}.svg`
 };
-
-
-const getRandomArrayElement = (element) => {
-  return element [getRandomNum(0, element.length - 1)];
-};
-
 
 const getNewComment = () => {
   return {
@@ -102,7 +91,6 @@ const getRandomCommentsArray = () => {
   }
   return commentsArray;
 };
-
 
 const getNewPhotoObject = (i = 1) => {
   return {
@@ -123,4 +111,4 @@ const getRandomUsersArray = () => {
 };
 
 
-getRandomUsersArray();
+export {getRandomUsersArray};
