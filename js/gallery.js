@@ -1,4 +1,5 @@
 import {getRandomUsersArray} from './data.js';
+import {createModalPicture} from './full-screen-photo.js'
 
 const photosList = document.querySelector('.pictures');
 const similarPhotos = getRandomUsersArray();
@@ -11,7 +12,9 @@ const getPhotoTemplate = (object) => {
   pictureElement.querySelector('.picture__img').src = object.url;
   pictureElement.querySelector('.picture__likes').textContent = object.comments.length;
   pictureElement.querySelector('.picture__comments').textContent = object.likes;
-
+  pictureElement.addEventListener('click', () => {
+    createModalPicture(object);
+  });
   return pictureElement;
 }
 
