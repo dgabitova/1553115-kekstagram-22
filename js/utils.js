@@ -16,8 +16,14 @@ const getRandomArrayElement = (element) => {
   return element [getRandomNum(0, element.length - 1)];
 };
 
-const isEscEvent = (evt) => {
-  return evt.key === ('Escape' || 'Esc');
+const Key = {
+  ESC: 'Escape' || 'Esc',
+};
+
+const isEscEvent = (evt, callback) => {
+  if (evt.key === Key.ESC) {
+    callback();
+  }
 };
 
 export {getRandomNum, checkLengthString, getRandomArrayElement, isEscEvent};

@@ -9,9 +9,7 @@ const modalPictureCommentsList = modalPicture.querySelector('.social__comments')
 const modalButtonCancel = modalPicture.querySelector('.big-picture__cancel');
 
 const onModalPictureEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
-    closeModal();
-  }
+  isEscEvent(evt, closeModal)
 }
 
 const openModal = () => {
@@ -39,18 +37,21 @@ const createModalPicture = (object) => {
   modalPictureDescription.textContent = object.description;
   modalPictureCommentsList.innerHTML = '';
 
-  if (object.comments.length > 0) {
-    object.comments.forEach((element) => {
-      const item = document.createElement('li');
-      item.classList.add('social__comment');
-      item.innerHTML = '<img class="social__picture" src="" alt="" width="35" height="35">' +
-        '<p class="social__text"></p>';
-      item.querySelector('.social__picture').src = element.avatar;
-      item.querySelector('.social__picture').alt = element.name;
-      item.querySelector('.social__text').textContent = element.message;
-      modalPictureCommentsList.appendChild(item);
-    });
+  const createSocialComment = (commentObj) => {
+    return `
+      <li class="social__comment">
+        <img
+          class="social__picture"
+          src="${commentObj.avatar}"
+          alt="${commentObj.name}"
+          width="35" height="35">
+        <p class="social__text">${commentObj.message}</p>
+      </li>`;
   }
+
+  const comments = object.comments.map((it) => createSocialComment(it));
+  modalPictureCommentsList.innerHTML = comments.join('');
+
   modalButtonCancel.addEventListener('click', () => {
     closeModal();
   });
