@@ -11,122 +11,129 @@ let unit = '';
 
 const slider = pictureUploadForm.querySelector('.effect-level__slider');
 
-const getSliderOn = () => {
-  noUiSlider.create(slider, {
-    range: {
-      min: 0,
-      max: 100,
+const initialConfig = {
+  range: {
+    min: 0,
+    max: 100,
+  },
+  start: 100,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
     },
-    start: 100,
-    step: 1,
-    connect: 'lower',
-    format: {
-      to: function (value) {
-        if (Number.isInteger(value)) {
-          return value.toFixed(0);
-        }
-        return value.toFixed(1);
-      },
-      from: function (value) {
-        return parseFloat(value);
-      },
+    from: function (value) {
+      return parseFloat(value);
     },
-  });
-  slider.noUiSlider.on('update', (values, handle) => {
-    effectLevel.value = values[handle];
-    uploadPhotoPreview.style.filter = `${filter}(${effectLevel.value}${unit})`;
-  });
+  },
+};
+
+const getSliderOn = (uiSlider = slider, config = initialConfig) => {
+  noUiSlider.create(uiSlider, config);
 }
 
-const getSliderOff = () => slider.noUiSlider.destroy();
+const getSliderOff = (uiSlider = slider) => {
+  slider.noUiSlider.destroy(uiSlider);
+}
 
-const getEffect = (evt)=> {
+const getEffect = (evt) => {
   if (evt.target.id === 'effect-none') {
     sliderArea.classList.add('hidden');
   } else {
     sliderArea.classList.remove('hidden');
   }
-
-  uploadPhotoPreview.className = 'img-upload__preview';
-
-  switch (evt.target.id) {
-
-    case 'effect-none':
-      uploadPhotoPreview.style.filter = '';
-      break;
-
-    case 'effect-chrome':
-      uploadPhotoPreview.classList.add('effects__preview--chrome');
-      filter = 'grayscale';
-      unit = '';
-      slider.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 1,
-        },
-        start: 1,
-        step: 0.1,
-      });
-      break;
-
-    case 'effect-sepia':
-      uploadPhotoPreview.classList.add('effects__preview--sepia');
-      filter = 'sepia';
-      unit = '';
-      slider.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 1,
-        },
-        start: 1,
-        step: 0.1,
-      });
-      break;
-
-    case 'effect-marvin':
-      uploadPhotoPreview.classList.add('effects__preview--marvin');
-      filter = 'invert';
-      unit = '%';
-      slider.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 100,
-        },
-        start: 100,
-        step: 1,
-      });
-      break;
-
-    case 'effect-phobos':
-      uploadPhotoPreview.classList.add('effects__preview--phobos');
-      filter = 'blur';
-      unit = 'px';
-      slider.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 3,
-        },
-        start: 3,
-        step: 0.1,
-      });
-      break;
-
-    case 'effect-heat':
-      uploadPhotoPreview.classList.add('effects__preview--heat');
-      filter = 'brightness';
-      unit = '';
-      slider.noUiSlider.updateOptions({
-        range: {
-          min: 1,
-          max: 3,
-        },
-        start: 3,
-        step: 0.1,
-      });
-      break;
-  }
 }
 
-effectList.addEventListener('change', getEffect);
+const effectMap = {
+  none: {
+    className: 'effects__preview--none',
+  },
+  chrome: {
+    className: 'effects__preview--chrome',
+    filter: 'grayscale',
+    unit: '',
+    options: {
+      range: {
+        min: 0,
+        max: 1,
+      },
+      start: 1,
+      step: 0.01,
+    },
+  },
+  sepia: {
+    className: 'effects__preview--sepia',
+    filter: 'sepia',
+    unit: '',
+    options: {
+      range: {
+        min: 0,
+        max: 1,
+      },
+      start: 1,
+      step: 0.01,
+    },
+  },
+  marvin: {
+    className: 'effects__preview--marvin',
+    filter: 'invert',
+    unit: '%',
+    options: {
+      range: {
+        min: 0,
+        max: 100,
+      },
+      start: 100,
+      step: 1,
+    },
+  },
+  phobos: {
+    className: 'effects__preview--phobos',
+    filter: 'blur',
+    unit: 'px',
+    options: {
+      range: {
+        min: 0,
+        max: 3,
+      },
+      start: 3,
+      step: 0.03,
+    },
+  },
+  heat: {
+    className: 'effects__preview--heat',
+    filter: 'brightness',
+    unit: '',
+    options: {
+      range: {
+        min: 1,
+        max: 3,
+      },
+      start: 3,
+      step: 0.03,
+    },
+  },
+};
 
-export {getSliderOn, getSliderOff};
+const onEffectListChange = (evt) => {
+  getEffect(evt);
+  window.console.log(evt.target);
+  if (evt.target.id === 'effect-none') {
+    return null
+  }
+  filter = effectMap[evt.target.value].filter;
+  unit = effectMap[evt.target.value].unit;
+  slider.noUiSlider.updateOptions(effectMap[evt.target.value].options);
+  slider.noUiSlider.on('update', (values, handle) => {
+    effectLevel.value = values[handle];
+    uploadPhotoPreview.style.filter = `${filter}(${values[handle]}${unit})`;
+  });
+}
+
+effectList.addEventListener('change', onEffectListChange);
+
+export { getSliderOn, getSliderOff };

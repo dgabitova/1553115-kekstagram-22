@@ -1,10 +1,12 @@
 import {getRandomUsersArray} from './data.js';
 import './gallery.js';
-import './photo-redactor.js';
-import './photo-effects.js';
+import {onModalRedactorOpen, onModalRedactorClose} from './photo-redactor.js';
 
-const usersArray = getRandomUsersArray();
+getRandomUsersArray();
+onModalRedactorOpen();
+onModalRedactorClose();
 
-window.console.log(usersArray);
+
+
 
 
