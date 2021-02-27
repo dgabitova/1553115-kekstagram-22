@@ -5,23 +5,24 @@ const scaleControlInput = pictureUploadForm.querySelector('.scale__control--valu
 const uploadPhotoPreview = pictureUploadForm.querySelector('.img-upload__preview');
 
 const SCALE_STEP = 25;
-let originalScale = 100;
+const SCALE_MIN = 25;
+const SCALE_MAX = 100;
+const ORIGINAL_SCALE = 100;
+let originalScale = ORIGINAL_SCALE;
 
 const onScaleControlSmaller = () => {
-  if (originalScale > 25 && originalScale <= 100) {
-    // eslint-disable-next-line no-const-assign
+  if (originalScale > SCALE_MIN && originalScale <= SCALE_MAX) {
     originalScale -= SCALE_STEP;
     scaleControlInput.value = `${originalScale}%`;
-    uploadPhotoPreview.style.transform = `scale(${originalScale/100})`;
+    uploadPhotoPreview.style.transform = `scale(${originalScale/SCALE_MAX})`;
   }
 };
 
 const onScaleControlBigger = () => {
-  if (originalScale >= 25 && originalScale < 100) {
-    // eslint-disable-next-line no-const-assign
+  if (originalScale >= SCALE_MIN && originalScale < SCALE_MAX) {
     originalScale += SCALE_STEP;
     scaleControlInput.value = `${originalScale}%`;
-    uploadPhotoPreview.style.transform = `scale(${originalScale/100})`;
+    uploadPhotoPreview.style.transform = `scale(${originalScale/SCALE_MAX})`;
   }
 }
 

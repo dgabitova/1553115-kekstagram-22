@@ -134,6 +134,7 @@ const onEffectListChange = (evt) => {
   });
 }
 
+
 effectList.addEventListener('change', onEffectListChange);
 
 export { getSliderOn, getSliderOff };

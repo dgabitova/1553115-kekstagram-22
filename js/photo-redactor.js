@@ -9,6 +9,7 @@ const modalCloseButtonRedactor = pictureUploadForm.querySelector('.img-upload__c
 const scaleControlSmaller = pictureUploadForm.querySelector('.scale__control--smaller');
 const scaleControlBigger = pictureUploadForm.querySelector('.scale__control--bigger');
 
+
 const onModalRedactorEscKeydown = (evt) => {
   isEscEvent(evt, onModalRedactorClose)
 }
