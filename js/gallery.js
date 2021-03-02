@@ -24,3 +24,4 @@ const drawPhotos = (similarPhotos) => {
 }
 
 photosList.appendChild(drawPhotos(similarPhotos));
+
