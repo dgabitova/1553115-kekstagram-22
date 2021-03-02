@@ -1,9 +1,6 @@
-import {getRandomUsersArray} from './data.js';
+import './data.js';
 import './gallery.js';
-import {onModalRedactorOpen, onModalRedactorClose} from './photo-redactor.js';
-
-
-
+import './photo-redactor.js';
 
 
 

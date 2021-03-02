@@ -19,5 +19,3 @@ const isEscEvent = (evt) => {
 };
 
 export {getRandomNum, checkLengthString, getRandomArrayElement, isEscEvent};
-
-

@@ -40,12 +40,10 @@ const getSliderOff = (uiSlider = slider) => {
   slider.noUiSlider.destroy(uiSlider);
 }
 
-const getEffect = (evt) => {
-  if (evt.target.id === 'effect-none') {
-    sliderArea.classList.add('hidden');
-  } else {
-    sliderArea.classList.remove('hidden');
-  }
+const resetSlider = () => {
+  sliderArea.classList.add('hidden');
+  uploadPhotoPreview.style.filter = '';
+  uploadPhotoPreview.style.transform = '';
 }
 
 const effectMap = {
@@ -120,10 +118,13 @@ const effectMap = {
 };
 
 const onEffectListChange = (evt) => {
-  getEffect(evt);
   window.console.log(evt.target);
   if (evt.target.id === 'effect-none') {
+    resetSlider();
     return null
+  }
+  else {
+    sliderArea.classList.remove('hidden');
   }
   filter = effectMap[evt.target.value].filter;
   unit = effectMap[evt.target.value].unit;
@@ -137,4 +138,4 @@ const onEffectListChange = (evt) => {
 
 effectList.addEventListener('change', onEffectListChange);
 
-export { getSliderOn, getSliderOff };
+export { getSliderOn, getSliderOff, resetSlider };

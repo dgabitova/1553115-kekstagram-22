@@ -1,5 +1,5 @@
 import {isEscEvent} from './utils.js';
-import {getSliderOn, getSliderOff} from './photo-effects.js';
+import {getSliderOn, getSliderOff, resetSlider} from './photo-effects.js';
 import {onScaleControlSmaller, onScaleControlBigger} from './photo-resize.js';
 
 const pictureUploadForm = document.querySelector('.img-upload__form');
@@ -15,6 +15,7 @@ const onModalRedactorEscKeydown = (evt) => {
 }
 
 const onModalRedactorOpen = () => {
+  resetSlider();
   modalPictureRedactor.classList.remove('hidden');
   document.querySelector('body').classList.add('modal-open');
   document.addEventListener('keydown', onModalRedactorEscKeydown);
