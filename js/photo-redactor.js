@@ -1,6 +1,7 @@
-import {isEscEvent} from './utils.js';
+import {isEscEvent} from './util.js';
 import {getSliderOn, getSliderOff, resetSlider} from './photo-effects.js';
 import {onScaleControlSmaller, onScaleControlBigger} from './photo-resize.js';
+import {createFetch} from './server.js';
 
 const pictureUploadForm = document.querySelector('.img-upload__form');
 const uploadImage = pictureUploadForm.querySelector('.img-upload__input');
@@ -22,6 +23,7 @@ const onModalRedactorOpen = () => {
   scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
   scaleControlBigger.addEventListener('click', onScaleControlBigger);
   getSliderOn();
+  createFetch(onModalRedactorClose);
 }
 
 const onModalRedactorClose = () => {
