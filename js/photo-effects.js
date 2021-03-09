@@ -1,4 +1,3 @@
-
 const pictureUploadForm = document.querySelector('.img-upload__form');
 const sliderArea = pictureUploadForm.querySelector('.img-upload__effect-level');
 const effectList = pictureUploadForm.querySelector('.effects__list');
