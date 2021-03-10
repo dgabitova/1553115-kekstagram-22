@@ -1,4 +1,4 @@
-import {isEscEvent} from './utils.js';
+import {isEscEvent} from './util.js';
 import {getSliderOn, getSliderOff, resetSlider} from './photo-effects.js';
 import {onScaleControlSmaller, onScaleControlBigger} from './photo-resize.js';
 
