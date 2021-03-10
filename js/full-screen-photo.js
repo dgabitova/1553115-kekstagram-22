@@ -1,4 +1,4 @@
-import {isEscEvent} from './utils.js';
+import {isEscEvent} from './util.js';
 
 const modalPicture = document.querySelector('.big-picture');
 const modalPictureImg = modalPicture.querySelector('.big-picture__img').querySelector('img');
@@ -28,7 +28,7 @@ const closeModal = () => {
   document.querySelector('body').classList.remove('modal-open');
 }
 
-const createModalPicture = (object) => {
+export const createModalPicture = (object) => {
   openModal();
   modalPictureImg.src = object.url;
   modalPictureImg.alt = '';
@@ -58,4 +58,3 @@ const createModalPicture = (object) => {
 
 }
 
-export {createModalPicture};
