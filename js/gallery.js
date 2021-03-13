@@ -1,8 +1,6 @@
-import {getRandomUsersArray} from './data.js';
 import {createModalPicture} from './full-screen-photo.js'
 
 const photosList = document.querySelector('.pictures');
-const similarPhotos = getRandomUsersArray();
 const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
@@ -25,13 +23,11 @@ const getPhotoTemplate = (object) => {
 }
 
 
-const drawPhotos = (similarPhotos) => {
+export const drawPhotos = (similarPhotos) => {
   const pictureFragment = document.createDocumentFragment();
   similarPhotos.forEach((item) => {
     pictureFragment.appendChild(getPhotoTemplate(item));
   });
-  return pictureFragment;
+  photosList.appendChild(pictureFragment);
 }
-
-photosList.appendChild(drawPhotos(similarPhotos));
 

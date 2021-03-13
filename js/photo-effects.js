@@ -1,4 +1,3 @@
-
 const pictureUploadForm = document.querySelector('.img-upload__form');
 const sliderArea = pictureUploadForm.querySelector('.img-upload__effect-level');
 const effectList = pictureUploadForm.querySelector('.effects__list');
@@ -32,15 +31,15 @@ const initialConfig = {
   },
 };
 
-const getSliderOn = (uiSlider = slider, config = initialConfig) => {
+export const getSliderOn = (uiSlider = slider, config = initialConfig) => {
   noUiSlider.create(uiSlider, config);
 }
 
-const getSliderOff = (uiSlider = slider) => {
+export const getSliderOff = (uiSlider = slider) => {
   slider.noUiSlider.destroy(uiSlider);
 }
 
-const resetSlider = () => {
+export const resetSlider = () => {
   sliderArea.classList.add('hidden');
   uploadPhotoPreview.style.filter = '';
   uploadPhotoPreview.style.transform = '';
@@ -138,4 +137,3 @@ const onEffectListChange = (evt) => {
 
 effectList.addEventListener('change', onEffectListChange);
 
-export { getSliderOn, getSliderOff, resetSlider };

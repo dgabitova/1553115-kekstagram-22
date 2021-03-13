@@ -10,7 +10,7 @@ const SCALE_MAX = 100;
 const ORIGINAL_SCALE = 100;
 let originalScale = ORIGINAL_SCALE;
 
-const onScaleControlSmaller = () => {
+export const onScaleControlSmaller = () => {
   if (originalScale > SCALE_MIN && originalScale <= SCALE_MAX) {
     originalScale -= SCALE_STEP;
     scaleControlInput.value = `${originalScale}%`;
@@ -18,7 +18,7 @@ const onScaleControlSmaller = () => {
   }
 };
 
-const onScaleControlBigger = () => {
+export const onScaleControlBigger = () => {
   if (originalScale >= SCALE_MIN && originalScale < SCALE_MAX) {
     originalScale += SCALE_STEP;
     scaleControlInput.value = `${originalScale}%`;
@@ -29,4 +29,3 @@ const onScaleControlBigger = () => {
 scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
 scaleControlBigger.addEventListener('click', onScaleControlBigger);
 
-export {onScaleControlSmaller, onScaleControlBigger};
