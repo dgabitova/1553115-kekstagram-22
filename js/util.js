@@ -14,8 +14,8 @@
 //   return element [getRandomNum(0, element.length - 1)];
 // };
 
-export const isEscEvent = (evt) => {
-  return evt.key === ('Escape' || 'Esc');
+export const isEscEvent = (evt, onModalRedactorClose) => {
+  if (evt.key === ('Escape' || 'Esc')) {
+    onModalRedactorClose()
+  }
 }
-
-

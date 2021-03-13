@@ -1,8 +1,5 @@
 import {sendData} from './api.js';
 import {createMessageUpload, createMessageError} from './api-message.js';
-//import {checkLengthString} from './util.js';
-
-const form = document.querySelector('.img-upload__form');
 
 const hashtagInput = document.querySelector('.text__hashtags');
 const description = document.querySelector('.text__description');
@@ -11,18 +8,9 @@ const DESCRIPTION_MAX_LENGTH = 140;
 const HASHTAG_MAX_LENGTH = 20;
 const HASHTAG_MAX_COUNT = 5;
 
-const onFormSubmit = (evt) => {
-  evt.preventDefault();
-  const formData = new FormData(form);
-  sendData(createMessageUpload, createMessageError, formData);
-};
-form.addEventListener('submit', onFormSubmit);
-
 export const validateHashtag = () => {
   let hashtagArray = [];
-
   hashtagArray = hashtagInput.value.toLowerCase().split(' ');
-
   hashtagArray.forEach((element, index, array)=>{
     if (element.length >= HASHTAG_MAX_LENGTH) {
       hashtagInput.setCustomValidity('Максимальная длина одного хэш-тега 20 символов, включая решётку');
@@ -48,3 +36,10 @@ export const validateDescription = () => {
   description.reportValidity();
 }
 
+const form = document.querySelector('.img-upload__form');
+const onFormSubmit = (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(form);
+  sendData(createMessageUpload, createMessageError, formData);
+};
+form.addEventListener('submit', onFormSubmit);
