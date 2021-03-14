@@ -1,5 +1,4 @@
-import {createModalPicture} from './full-screen-photo.js'
-
+import {createModalPicture} from './full-screen-photo.js';
 
 const photosList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
@@ -22,8 +21,6 @@ const getPhotoTemplate = (object) => {
   });
   return pictureElement;
 }
-
-
 
 export const drawPhotos = (similarPhotos) => {
 

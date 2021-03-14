@@ -1,8 +1,8 @@
 // Get random number
-// const getRandomNum = function(minNumber, maxNumber) {
-//   const randomNum = Math.floor(Math.random() * maxNumber);
-//   return randomNum > minNumber ? randomNum : minNumber;
-// };
+export const getRandomNum = function(minNumber, maxNumber) {
+  const randomNum = Math.floor(Math.random() * maxNumber);
+  return randomNum > minNumber ? randomNum : minNumber;
+};
 
 // Get max string value
 // export const checkLengthString = (string, max) => {
@@ -10,7 +10,7 @@
 // }
 
 //Get random array element
-// const getRandomArrayElement = (element) => {
+// export const getRandomArrayElement = (element) => {
 //   return element [getRandomNum(0, element.length - 1)];
 // };
 
