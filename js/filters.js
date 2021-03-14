@@ -1,40 +1,66 @@
-const RANDOM_FILTER_PHOTO_COUNT = 10;
+/* eslint-disable no-undef */
+import {drawPhotos} from './gallery.js';
+import {getData} from './api.js';
 
-export const filter = document.querySelector('.img-filters');
 const filterDefaultButton = document.querySelector('#filter-default');
 const filterRandomButton = document.querySelector('#filter-random');
 const filterDiscussedButton = document.querySelector('#filter-discussed');
+const filterButton = document.querySelectorAll('.img-filters__button');
 
-export const loadFilter = () => {
-  filter.classList.remove('img-filters--inactive');
-};
+const RERENDER_DELAY = 500;
 
-export const setDiscussedPhotos = (cb) => {
-  filterDiscussedButton.addEventListener('click', (evt) => {
-    evt.target.classList.add('img-filters__button--active');
-    filterDefaultButton.classList.remove('img-filters__button--active');
-    filterRandomButton.classList.remove('img-filters__button--active');
-    cb();
+const handleClick = (evt) => {
+  filterButton.forEach(filterButton => {
+    filterButton.classList.remove('img-filters__button--active')
   });
-};
+  evt.target.classList.add('img-filters__button--active');
+}
 
-export const setDefaultPhotos = (cb) => {
-  filterDefaultButton.addEventListener('click', (evt) => {
-    evt.target.classList.add('img-filters__button--active');
-    filterDiscussedButton.classList.remove('img-filters__button--active');
-    filterRandomButton.classList.remove('img-filters__button--active');
-    cb();
-  });
-};
+filterButton.forEach(filterButton => {
+  filterButton.addEventListener('click', handleClick);
+});
 
-export const setRandomPhotos = (cb) => {
-  for (let i = 0; i < RANDOM_FILTER_PHOTO_COUNT; i++) {
-    filterRandomButton.addEventListener('click', (evt) => {
-      evt.target.classList.add('img-filters__button--active');
-      filterDiscussedButton.classList.remove('img-filters__button--active');
-      filterDefaultButton.classList.remove('img-filters__button--active');
-      cb();
-    });
+const cleanData = () => {
+  const smallPhotos = document.querySelectorAll('.picture');
+  for(let i=0; i < smallPhotos.length; i++){
+    smallPhotos[i].remove();
   }
 };
 
+filterDefaultButton.addEventListener('click', () => {
+  cleanData();
+  getData();
+});
+
+const getRandomPhotos = (pictures) => {
+  return pictures.sort(() => Math.random() - 0.5);
+}
+
+filterRandomButton.addEventListener('click', _.debounce(() => {
+  cleanData();
+  fetch('https://22.javascript.pages.academy/kekstagram/data')
+    .then((response) => response.json())
+    .then((photos) => {
+      drawPhotos(getRandomPhotos(photos)
+        .slice(0, 10));
+    });
+},
+RERENDER_DELAY));
+
+const sortComment = (pictureA, pictureB) => {
+  const commentA = pictureA.comments.length;
+  const commentB = pictureB.comments.length;
+  return commentB - commentA;
+}
+
+filterDiscussedButton.addEventListener('click', _.debounce(() => {
+  cleanData();
+  fetch('https://22.javascript.pages.academy/kekstagram/data')
+    .then((response) => response.json())
+    .then((photos) => {
+      drawPhotos(photos
+        .slice()
+        .sort(sortComment));
+    });
+},
+RERENDER_DELAY));

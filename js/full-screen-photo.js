@@ -1,6 +1,5 @@
 import {isEscEvent} from './util.js';
 
-
 const modalPicture = document.querySelector('.big-picture');
 const modalPictureImg = modalPicture.querySelector('.big-picture__img').querySelector('img');
 const modalPictureLikes = modalPicture.querySelector('.likes-count');
