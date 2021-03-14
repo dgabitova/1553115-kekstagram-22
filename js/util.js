@@ -5,7 +5,7 @@
 // };
 
 // Get max string value
-// const checkLengthString = (string, max) => {
+// export const checkLengthString = (string, max) => {
 //   return string.length <= max;
 // }
 
@@ -14,8 +14,8 @@
 //   return element [getRandomNum(0, element.length - 1)];
 // };
 
-const isEscEvent = (evt) => {
-  return evt.key === ('Escape' || 'Esc');
+export const isEscEvent = (evt, callBack) => {
+  if (evt.key === ('Escape' || 'Esc')) {
+    callBack()
+  }
 }
-
-export {isEscEvent};

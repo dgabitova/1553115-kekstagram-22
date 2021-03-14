@@ -1,5 +1,3 @@
-
-import {getRandomUsersArray} from './data.js';
 import {createModalPicture} from './full-screen-photo.js'
 
 
@@ -26,7 +24,9 @@ const getPhotoTemplate = (object) => {
 }
 
 
-const drawPhotos = (similarPhotos) => {
+
+export const drawPhotos = (similarPhotos) => {
+
   const pictureFragment = document.createDocumentFragment();
   similarPhotos.forEach((item) => {
     pictureFragment.appendChild(getPhotoTemplate(item));
@@ -34,4 +34,3 @@ const drawPhotos = (similarPhotos) => {
   photosList.appendChild(pictureFragment);
 }
 
-export {drawPhotos};
