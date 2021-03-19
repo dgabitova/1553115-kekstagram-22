@@ -28,9 +28,7 @@ const closeModal = () => {
   document.querySelector('body').classList.remove('modal-open');
 }
 
-
 export const createModalPicture = (object) => {
-
   openModal();
   modalPictureImg.src = object.url;
   modalPictureImg.alt = '';
@@ -57,6 +55,6 @@ export const createModalPicture = (object) => {
   modalButtonCancel.addEventListener('click', () => {
     closeModal();
   });
-
 }
+
 
