@@ -55,6 +55,6 @@ export const createModalPicture = (object) => {
   modalButtonCancel.addEventListener('click', () => {
     closeModal();
   });
-
 }
+
 

@@ -1,4 +1,6 @@
+
 import {createModalPicture} from './full-screen-photo.js'
+
 
 const photosList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
@@ -22,12 +24,19 @@ const getPhotoTemplate = (object) => {
   return pictureElement;
 }
 
-
 export const drawPhotos = (similarPhotos) => {
+  cleanData ();
   const pictureFragment = document.createDocumentFragment();
   similarPhotos.forEach((item) => {
     pictureFragment.appendChild(getPhotoTemplate(item));
   });
   photosList.appendChild(pictureFragment);
 }
+
+export const cleanData = () => {
+  const smallPhotos = document.querySelectorAll('.picture');
+  for(let i=0; i < smallPhotos.length; i++){
+    smallPhotos[i].remove();
+  }
+};
 
