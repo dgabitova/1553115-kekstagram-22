@@ -7,6 +7,8 @@ const modalPictureDescription = modalPicture.querySelector('.social__caption');
 const modalPictureCommentsCount = modalPicture.querySelector('.comments-count');
 const modalPictureCommentsList = modalPicture.querySelector('.social__comments');
 const modalButtonCancel = modalPicture.querySelector('.big-picture__cancel');
+const commentsLoader = modalPicture.querySelector('.comments-loader');
+
 
 const onModalPictureEscKeydown = (evt) => {
   isEscEvent(evt, closeModal)
@@ -18,6 +20,7 @@ const openModal = () => {
   modalPicture.querySelector('.social__comment-count').classList.add('hidden');
   modalPicture.querySelector('.social__comments-loader').classList.add('hidden');
   document.querySelector('body').classList.add('modal-open');
+  commentsLoader.classList.remove('hidden');
 }
 
 const closeModal = () => {
@@ -55,6 +58,31 @@ export const createModalPicture = (object) => {
   modalButtonCancel.addEventListener('click', () => {
     closeModal();
   });
-}
+
+
+  const allComments = document.querySelectorAll('.social__comment');
+  allComments.forEach((comment) => {
+    comment.classList.add('hidden');
+  });
+
+  showComments(5);
+};
+
+const showComments = (n) => {
+  const shownComments = document.querySelectorAll('.social__comment.hidden');
+  const commentsNumber = Array.prototype.slice.call(shownComments).slice(0, n);
+
+  commentsNumber.forEach((comment) => {
+    comment.classList.remove('hidden');
+  });
+  if (commentsNumber.length == 0) {
+    commentsLoader.classList.add('hidden');
+  }
+};
+
+commentsLoader.addEventListener('click', () => {
+  showComments(5);
+});
+
 
 
