@@ -2,25 +2,21 @@ import './gallery.js';
 import './full-screen-photo.js'
 import './photo-redactor.js';
 import {getData} from './api.js';
-import './api-message.js';
+import {createMessageError} from './api-message.js';
 import {drawPhotos} from './gallery.js';
 import './form-validation.js';
-import {setRandomPhotos, setDiscussedPhotos, setDefaultPhotos} from './filters.js';
+import {initFilters} from './filters.js';
 
-//getData(drawPhotos);
-const RERENDER_DELAY = 500;
+const onLoad = (photosData) => {
+  drawPhotos (photosData);
+  initFilters (photosData);
+}
 
-getData((posts) => {
-  drawPhotos(posts);
-  setDefaultPhotos(_.debounce(
-    () => drawPhotos(posts),
-    RERENDER_DELAY));
-  setDiscussedPhotos(_.debounce(
-    () => drawPhotos(posts),
-    RERENDER_DELAY));
-  setRandomPhotos(_.debounce(
-    () => drawPhotos(posts),
-    RERENDER_DELAY));
-});
+const onError = () => {
+  createMessageError();
+}
+
+getData(onLoad, onError);
+
 
 
