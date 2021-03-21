@@ -1,67 +1,19 @@
-/* eslint-disable no-undef */
 import {drawPhotos} from './gallery.js';
-//import {getData} from './api.js';
 
-// const filterDefaultButton = document.querySelector('#filter-default');
-// const filterRandomButton = document.querySelector('#filter-random');
-// const filterDiscussedButton = document.querySelector('#filter-discussed');
-// const filterButtons = document.querySelectorAll('.img-filters__button');
 const filtersForm = document.querySelector('.img-filters__form');
-const filter = document.querySelector('.img-filters');
-
-// const RERENDER_DELAY = 500;
-
 
 const defaultFilter = (photosData) => {
-  return photosData;
+  return photosData.slice(0);
 };
 
 const randomFilter = (pictures) => {
-  const picturesCopy = pictures.slice(0);
-  const getRandomPhotos = (picturesCopy) => {
-    return picturesCopy.sort(() => Math.random() - 0.5);
-  }
-  return getRandomPhotos(picturesCopy);
+  const picturesCopy = pictures.slice(0).sort(() => Math.random() - 0.5);
+  return picturesCopy.slice(0, 10);
 }
 
-const discussedFilter = () => {
-
-
+const discussedFilter = (data) => {
+  return data.slice(0).sort((a, b) => b.comments.length - a.comments.length)
 };
-
-
-// filterDefaultButton.addEventListener('click', () => {
-//   cleanData();
-//   getData();
-// });
-// filterRandomButton.addEventListener('click', _.debounce(() => {
-//   cleanData();
-//   fetch('https://22.javascript.pages.academy/kekstagram/data')
-//     .then((response) => response.json())
-//     .then((photos) => {
-//       drawPhotos(getRandomPhotos(photos)
-//         .slice(0, 10));
-//     });
-// },
-// RERENDER_DELAY));
-
-// const sortComment = (pictureA, pictureB) => {
-//   const commentA = pictureA.comments.length;
-//   const commentB = pictureB.comments.length;
-//   return commentB - commentA;
-// }
-
-// filterDiscussedButton.addEventListener('click', _.debounce(() => {
-//   cleanData();
-//   fetch('https://22.javascript.pages.academy/kekstagram/data')
-//     .then((response) => response.json())
-//     .then((photos) => {
-//       drawPhotos(photos
-//         .slice()
-//         .sort(sortComment));
-//     });
-// },
-// RERENDER_DELAY));
 
 const filtersType = {
   'filter-default': defaultFilter,
@@ -69,14 +21,18 @@ const filtersType = {
   'filter-discussed': discussedFilter,
 };
 
-
 export const initFilters = (data) => {
-  filter.classList.remove('img-filters--inactive');
-  const onFiltersFormClick = (evt) => {
-    const filteredData = filtersType[evt.target.id](data);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+
+  const onFiltersFormClick = ({target}) => {
+    let currentFilter = target.id;
+    const filteredData = filtersType[currentFilter](data);
     drawPhotos(filteredData);
   }
-  filtersForm.addEventListener('click', onFiltersFormClick);
+
+  // eslint-disable-next-line no-undef
+  const debouncedClick = _.debounce(onFiltersFormClick, 500);
+  filtersForm.addEventListener('click', debouncedClick);
 }
 
 const onFilterButtonsMouseUp = (evt) => {

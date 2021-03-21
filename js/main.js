@@ -9,7 +9,7 @@ import {initFilters} from './filters.js';
 
 const onLoad = (photosData) => {
   drawPhotos (photosData);
-  initFilters (photosData);
+  initFilters(photosData);
 }
 
 const onError = () => {

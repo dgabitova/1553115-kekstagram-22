@@ -9,7 +9,6 @@ const modalPictureCommentsList = modalPicture.querySelector('.social__comments')
 const modalButtonCancel = modalPicture.querySelector('.big-picture__cancel');
 const commentsLoader = modalPicture.querySelector('.comments-loader');
 
-
 const onModalPictureEscKeydown = (evt) => {
   isEscEvent(evt, closeModal)
 }
@@ -58,7 +57,6 @@ export const createModalPicture = (object) => {
   modalButtonCancel.addEventListener('click', () => {
     closeModal();
   });
-
 
   const allComments = document.querySelectorAll('.social__comment');
   allComments.forEach((comment) => {
