@@ -1,3 +1,4 @@
+/* global _:readonly */
 import {drawPhotos} from './gallery.js';
 
 const filtersForm = document.querySelector('.img-filters__form');
@@ -30,7 +31,6 @@ export const initFilters = (data) => {
     drawPhotos(filteredData);
   }
 
-  // eslint-disable-next-line no-undef
   const debouncedClick = _.debounce(onFiltersFormClick, 500);
   filtersForm.addEventListener('click', debouncedClick);
 }
