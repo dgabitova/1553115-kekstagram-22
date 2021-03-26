@@ -8,8 +8,8 @@ const pictureTemplate = document.querySelector('#picture')
 const getPhotoTemplate = (object) => {
   const pictureElement = pictureTemplate.cloneNode(true);
   pictureElement.querySelector('.picture__img').src = object.url;
-  pictureElement.querySelector('.picture__likes').textContent = object.comments.length;
-  pictureElement.querySelector('.picture__comments').textContent = object.likes;
+  pictureElement.querySelector('.picture__likes').textContent = object.likes;
+  pictureElement.querySelector('.picture__comments').textContent = object.comments.length;
   pictureElement.dataset.photoId = object.id;
 
   pictureElement.addEventListener('click', (e) => {
