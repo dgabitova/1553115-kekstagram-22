@@ -3,6 +3,7 @@ import {createMessageUpload, createMessageError} from './api-message.js';
 
 const hashtagInput = document.querySelector('.text__hashtags');
 const description = document.querySelector('.text__description');
+const form = document.querySelector('.img-upload__form');
 const regular = /^#[a-zа-яё0-9]{1,19}/i;
 const DESCRIPTION_MAX_LENGTH = 140;
 const HASHTAG_MAX_LENGTH = 20;
@@ -36,7 +37,6 @@ export const validateDescription = () => {
   description.reportValidity();
 }
 
-const form = document.querySelector('.img-upload__form');
 const onFormSubmit = (evt) => {
   evt.preventDefault();
   const formData = new FormData(form);
