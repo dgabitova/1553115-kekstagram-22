@@ -9,6 +9,8 @@ const modalPictureCommentsList = modalPicture.querySelector('.social__comments')
 const modalButtonCancel = modalPicture.querySelector('.big-picture__cancel');
 const commentsLoader = modalPicture.querySelector('.comments-loader');
 
+const SHOW_COMMENTS = 5;
+
 const onModalPictureEscKeydown = (evt) => {
   isEscEvent(evt, closeModal)
 }
@@ -63,23 +65,19 @@ export const createModalPicture = (object) => {
     comment.classList.add('hidden');
   });
 
-  showComments(5);
+  showComments(SHOW_COMMENTS);
 };
 
 const showComments = (n) => {
-  const shownComments = document.querySelectorAll('.social__comment.hidden');
-  const commentsNumber = Array.prototype.slice.call(shownComments).slice(0, n);
-
-  commentsNumber.forEach((comment) => {
-    comment.classList.remove('hidden');
-  });
-  if (commentsNumber.length == 0) {
+  const hiddenComments = document.querySelectorAll('.social__comment.hidden');
+  if (hiddenComments.length <= SHOW_COMMENTS) {
     commentsLoader.classList.add('hidden');
   }
+  [...hiddenComments].slice(0, n).forEach((comment) => comment.classList.remove('hidden'));
 };
 
 commentsLoader.addEventListener('click', () => {
-  showComments(5);
+  showComments(SHOW_COMMENTS);
 });
 
 
