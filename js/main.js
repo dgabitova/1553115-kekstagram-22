@@ -7,11 +7,9 @@ import {drawPhotos} from './gallery.js';
 import './form-validation.js';
 import {initFilters} from './filters.js';
 
-
-
 const onLoad = (photosData) => {
   drawPhotos (photosData);
-  initFilters (photosData);
+  initFilters(photosData);
 }
 
 const onError = () => {
@@ -19,5 +17,6 @@ const onError = () => {
 }
 
 getData(onLoad, onError);
+
 
 
