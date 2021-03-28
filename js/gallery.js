@@ -10,13 +10,8 @@ const getPhotoTemplate = (object) => {
   pictureElement.querySelector('.picture__img').src = object.url;
   pictureElement.querySelector('.picture__likes').textContent = object.likes;
   pictureElement.querySelector('.picture__comments').textContent = object.comments.length;
-  pictureElement.dataset.photoId = object.id;
 
-  pictureElement.addEventListener('click', (e) => {
-    const target = e.target;
-    if (target.dataset.photoId !== undefined) {
-      return target.dataset.photoId;
-    }
+  pictureElement.addEventListener('click', () => {
     createModalPicture(object);
   });
   return pictureElement;

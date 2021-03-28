@@ -10,41 +10,6 @@ let unit = '';
 
 const slider = pictureUploadForm.querySelector('.effect-level__slider');
 
-const initialConfig = {
-  range: {
-    min: 0,
-    max: 100,
-  },
-  start: 100,
-  step: 1,
-  connect: 'lower',
-  format: {
-    to: function (value) {
-      if (Number.isInteger(value)) {
-        return value.toFixed(0);
-      }
-      return value.toFixed(1);
-    },
-    from: function (value) {
-      return parseFloat(value);
-    },
-  },
-};
-
-export const getSliderOn = (uiSlider = slider, config = initialConfig) => {
-  noUiSlider.create(uiSlider, config);
-}
-
-export const getSliderOff = (uiSlider = slider) => {
-  slider.noUiSlider.destroy(uiSlider);
-}
-
-export const resetSlider = () => {
-  sliderArea.classList.add('hidden');
-  uploadPhotoPreview.style.filter = '';
-  uploadPhotoPreview.style.transform = '';
-}
-
 const effectMap = {
   none: {
     className: 'effects__preview--none',
@@ -116,8 +81,43 @@ const effectMap = {
   },
 };
 
+const initialConfig = {
+  range: {
+    min: 0,
+    max: 100,
+  },
+  start: 100,
+  step: 1,
+  connect: 'lower',
+  format: {
+    to: function (value) {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: function (value) {
+      return parseFloat(value);
+    },
+  },
+};
+
+export const getSliderOn = (uiSlider = slider, config = initialConfig) => {
+  document.querySelector('.effect-level').classList.remove('visually-hidden');
+  noUiSlider.create(uiSlider, config);
+}
+
+export const getSliderOff = (uiSlider = slider) => {
+  slider.noUiSlider.destroy(uiSlider);
+}
+
+export const resetSlider = () => {
+  sliderArea.classList.add('hidden');
+  uploadPhotoPreview.style.filter = '';
+  uploadPhotoPreview.style.transform = '';
+}
+
 const onEffectListChange = (evt) => {
-  window.console.log(evt.target);
   if (evt.target.id === 'effect-none') {
     resetSlider();
     return null
@@ -133,7 +133,6 @@ const onEffectListChange = (evt) => {
     uploadPhotoPreview.style.filter = `${filter}(${values[handle]}${unit})`;
   });
 }
-
 
 effectList.addEventListener('change', onEffectListChange);
 

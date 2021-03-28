@@ -26,6 +26,11 @@ export const onScaleControlBigger = () => {
   }
 }
 
+export const resetPhotoResize = () => {
+  scaleControlInput.value = `${ORIGINAL_SCALE}%`;
+  uploadPhotoPreview.style.transform = 'none';
+}
+
 scaleControlSmaller.addEventListener('click', onScaleControlSmaller);
 scaleControlBigger.addEventListener('click', onScaleControlBigger);
 

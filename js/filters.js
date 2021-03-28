@@ -3,23 +3,26 @@ import {drawPhotos} from './gallery.js';
 
 const filtersForm = document.querySelector('.img-filters__form');
 
-const defaultFilter = (photosData) => {
+const RERENDER_DELAY = 500;
+const RANDOM_PHOTOS_QUANTITY = 10;
+
+const getDefaultFilter = (photosData) => {
   return photosData.slice(0);
 };
 
-const randomFilter = (pictures) => {
+const getRandomFilter = (pictures) => {
   const picturesCopy = pictures.slice(0).sort(() => Math.random() - 0.5);
-  return picturesCopy.slice(0, 10);
+  return picturesCopy.slice(0, RANDOM_PHOTOS_QUANTITY);
 }
 
-const discussedFilter = (data) => {
+const getDiscussedFilter = (data) => {
   return data.slice(0).sort((a, b) => b.comments.length - a.comments.length)
 };
 
 const filtersType = {
-  'filter-default': defaultFilter,
-  'filter-random': randomFilter,
-  'filter-discussed': discussedFilter,
+  'filter-default': getDefaultFilter,
+  'filter-random': getRandomFilter,
+  'filter-discussed': getDiscussedFilter,
 };
 
 export const initFilters = (data) => {
@@ -31,7 +34,7 @@ export const initFilters = (data) => {
     drawPhotos(filteredData);
   }
 
-  const debouncedClick = _.debounce(onFiltersFormClick, 500);
+  const debouncedClick = _.debounce(onFiltersFormClick, RERENDER_DELAY);
   filtersForm.addEventListener('click', debouncedClick);
 }
 

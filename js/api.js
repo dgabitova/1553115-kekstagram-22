@@ -1,5 +1,8 @@
+const SERVER_URL_DOWNLOAD_DATA = 'https://22.javascript.pages.academy/kekstagram/data';
+const SERVER_URL_UPLOAD_DATA = 'https://22.javascript.pages.academy/kekstagram';
+
 export const getData = (onSuccess, onFail) => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data')
+  fetch(SERVER_URL_DOWNLOAD_DATA)
     .then((response) => response.json())
     .then((photos) => {
       onSuccess(photos);
@@ -11,7 +14,7 @@ export const getData = (onSuccess, onFail) => {
 
 export const sendData = (onSuccess, onFail, body) => {
   fetch(
-    'https://22.javascript.pages.academy/kekstagram',
+    SERVER_URL_UPLOAD_DATA,
     {
       method: 'POST',
       body,
@@ -28,3 +31,4 @@ export const sendData = (onSuccess, onFail, body) => {
       onFail();
     });
 };
+

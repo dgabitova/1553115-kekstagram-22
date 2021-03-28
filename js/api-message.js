@@ -9,20 +9,20 @@ export const createMessageUpload = () => {
   mainTag.appendChild(message);
   const button = message.querySelector('.success__button');
 
-  const isEscMessage = (evt) => {
+  const onDocumentKeydown = (evt) => {
     if (isEscEvent(evt) || evt.target.className === 'success') {
       mainTag.removeChild(message);
-      document.removeEventListener('keydown', isEscMessage);
+      document.removeEventListener('keydown', onDocumentKeydown);
     }
   }
 
-  button.addEventListener('click', ()=>{
+  button.addEventListener('click', () => {
     mainTag.removeChild(message);
-    document.removeEventListener('keydown', isEscMessage);
+    document.removeEventListener('keydown', onDocumentKeydown);
   });
 
-  message.addEventListener('click', isEscMessage);
-  document.addEventListener('keydown', isEscMessage);
+  message.addEventListener('click', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
 }
 
 export const createMessageError = () => {
@@ -35,19 +35,19 @@ export const createMessageError = () => {
   errorTitle.textContent = 'Сервер не отвечает';
   errorButton.textContent = 'Пожалуйста, зайдите позднее';
 
-  const isEscMessage = (evt) => {
+  const onDocumentKeydown = (evt) => {
     if (isEscEvent(evt) || evt.target.className === 'error') {
       mainTag.removeChild(message);
-      document.removeEventListener('keydown', isEscMessage);
+      document.removeEventListener('keydown', onDocumentKeydown);
     }
   }
 
   errorButton.addEventListener('click', () => {
     mainTag.removeChild(message);
-    document.removeEventListener('keydown', isEscMessage);
+    document.removeEventListener('keydown', onDocumentKeydown);
   });
-  message.addEventListener('click', isEscMessage);
-  document.addEventListener('keydown', isEscMessage);
+  message.addEventListener('click', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown);
 }
 
 
